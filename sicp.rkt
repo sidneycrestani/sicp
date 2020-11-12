@@ -80,6 +80,7 @@
     (/ a 2)
     (error "can't halve odds")))
 
+; 1.17
 (define (r-* a b)
   (cond ((= a 1) b)
 	((even? a) (double (r-* (halve a) b)))
