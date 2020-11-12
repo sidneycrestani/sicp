@@ -77,20 +77,20 @@
   (+ a a))
 (define (halve a)
   (if (even? a)
-    (/ a 2)
-    (error "can't halve odds")))
+      (/ a 2)
+      (error "can't halve odds")))
 
 ; 1.17
 (define (r-* a b)
   (cond ((= a 1) b)
-	((even? a) (double (r-* (halve a) b)))
-	(else (+ b (r-* (dec a) b)))))
+        ((even? a) (double (r-* (halve a) b)))
+        (else (+ b (r-* (dec a) b)))))
 ; 1.18
 (define (iter-* a b)
   (define (calc v a b)
     (cond ((= a 0) v)
-	  ((even? a) (calc v (halve a) (double b)))
-	  (else (calc (+ v b) (dec a) b))))
+          ((even? a) (calc v (halve a) (double b)))
+          (else (calc (+ v b) (dec a) b))))
   (calc 0 a b))
 
 
