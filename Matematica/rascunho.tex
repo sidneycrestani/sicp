@@ -1,0 +1,71 @@
+%!TEX program = xelatex
+\documentclass[12pt]{article}
+\usepackage{unicode-math}
+\usepackage[margin=1in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{mathtools,amsmath,amsthm, enumitem, fancyhdr, color, comment, graphicx, environ}
+
+
+\pagestyle{fancy}
+\setlength{\headheight}{65pt}
+\newenvironment{problem}[2][Problema]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+	\newenvironment{sol}
+	{\emph{Solu\c c\~{a}o:}
+	}
+	{
+		\qed
+	}
+	\specialcomment{com}{ \color{blue} \textbf{Comment:} }{\color{black}} %for instructor comments while grading
+	\NewEnviron{probscore}{\marginpar{ \color{blue} \tiny Problem Score: \BODY \color{black} }}
+
+	%%% Text font:
+	\setmainfont[
+	Ligatures={TeX,Common},
+	Numbers={OldStyle,Proportional},
+	Kerning=On,
+	]{Minion Pro}
+	%%% Math fonts:
+	\setmathfont[version=bold]{MinionMath-Bold.otf}
+
+
+	\setmathfont[
+	Extension = .otf,
+	Scale = 1,
+	Script = Math,
+	SizeFeatures = {
+		{Size = -6, Font = MinionMath-Tiny,
+		Style = MathScriptScript},
+		{Size = 6-8.4, Font = MinionMath-Capt,
+		Style = MathScript},
+		{Size = 8.4-13, Font = MinionMath-Regular,
+		Style = MathScript},
+	},
+	]{MinionMath-Regular}
+
+	\lhead{Sidney Crestani}  %replace with your name
+	\rhead{SICP} %replace XYZ with the 
+
+	\begin{document}
+	\begin{problem}{1.19} 
+	\end{problem}
+	\begin{sol}
+
+		\begin{equation*}
+			\begin{split}
+				T(a,b) &=(bq+aq+ap,bp+aq) \\
+				T(T(a,b))&= [q(bp+aq)+(p+q)(bq+aq+ap), \\
+					 & p(bp+aq)+q(bq+aq+ap)] \\
+					 &= [bqp + aq^2 + pbq + aqp + ap^2 \\
+					 &+ bq^2 + aq^2 + aqp,\\
+					 & bp^2 + aqp + bq^2 + aq^2 + aqp] \\
+					 &= [b(2qp + q^2) + a(2qp + q^2) + a(p^2 + q^2),  \\
+					 & b(p^2 + q^2) + a(2qp + q^2)] \\
+					&= (bq'+aq'+ap',bp'+aq') \\
+					\therefore (p',q') &= (p^2+q^2,q^2+2qp)
+			\end{split}
+		\end{equation*}
+	\end{sol}
+
+	\end{document}

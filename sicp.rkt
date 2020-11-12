@@ -93,6 +93,24 @@
           (else (calc (+ v b) (dec a) b))))
   (calc 0 a b))
 
+; 1.19
+(define (fib2 n)
+  (fib-iter2 1 0 0 1 n))
+(define (fib-iter2 a b p q count)
+  (cond ((= count 0) b)
+        ((even? count)
+         (fib-iter2 a
+                    b
+                    ; compute p ′
+                    ; compute q ′
+                    (+ (sq p) (sq q))
+                    (+ (sq q) (* 2 q p))
+                    (/ count 2)))
+        (else (fib-iter2 (+ (* b q) (* a q) (* a p))
+                         (+ (* b p) (* a q))
+                         p
+                         q
+                         (- count 1)))))
 
 (define (sum a b prox form)
   (define (iter valor i)
