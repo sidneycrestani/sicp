@@ -17,6 +17,8 @@
       (+ (sq a) (sum-squares (+ a 1) b))))
 (define (average x y)
   (/ (+ x y) 2))
+(define (even? x)
+  (= (remainder x 2) 0))
 
 (define (fib n)
   (cond ((= n 0) 0)
@@ -55,13 +57,41 @@
                 )))
   (cc vl 5))
 
-
+; 1.12
 (define (pascal-triang linha elemento)
   (define (calcula l e)
     (if (or (= l e) (= e 1)) 1
         (+ (calcula (- l 1) (- e 1))
            (calcula (- l 1) e))))
   (calcula linha elemento))
+
+;1.16
+(define (iter-exp n b)
+  (define (calc n b a)
+    (cond ((= n 0) a)
+          ((even? n) (calc (/ n 2) (sq b) a))
+          (else (calc (dec n) b (* a b)))))
+  (calc n b 1))
+
+(define (double a)
+  (+ a a))
+(define (halve a)
+  (if (even? a)
+    (/ a 2)
+    (error "can't halve odds")))
+
+(define (r-* a b)
+  (cond ((= a 1) b)
+	((even? a) (double (r-* (halve a) b)))
+	(else (+ b (r-* (dec a) b)))))
+; 1.18
+(define (iter-* a b)
+  (define (calc v a b)
+    (cond ((= a 0) v)
+	  ((even? a) (calc v (halve a) (double b)))
+	  (else (calc (+ v b) (dec a) b))))
+  (calc 0 a b))
+
 
 (define (sum a b prox form)
   (define (iter valor i)
@@ -308,13 +338,3 @@
                       f)
    first-guess))
 
-;1.16
-(define (even? x)
-  (= (remainder x 2) 0))
-
-(define (iter-exp n b)
-  (define (calc n b a)
-    (cond ((= n 0) a)
-          ((even? n) (calc (/ n 2) (sq b) a))
-          (else (calc (dec n) b (* a b)))))
-  (calc n b 1))
